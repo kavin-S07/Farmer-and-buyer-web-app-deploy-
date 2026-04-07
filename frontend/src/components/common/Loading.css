@@ -1,0 +1,169 @@
+/* Loader Wrapper */
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Loader Content Container */
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Main Loader Circle (only this spins) */
+.loader {
+  width: var(--loader-size, 50px);
+  height: var(--loader-size, 50px);
+  padding: var(--loader-thickness, 8px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--loader-color, #25b09b);
+  --_m:
+    conic-gradient(#0000 10%, #000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: loader-spin var(--loader-speed, 1s) infinite linear;
+  box-sizing: border-box;
+}
+
+@keyframes loader-spin {
+  to { transform: rotate(1turn); }
+}
+
+/* Loader Message (DOES NOT spin) */
+.loader-message {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+  max-width: 200px;
+  animation: none !important; /* Ensure no animation */
+}
+
+/* Full Page Loader */
+.full-page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.full-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.full-page-message {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+  animation: none !important;
+}
+
+/* Color Variants */
+.loader.primary { background: #007bff; }
+.loader.success { background: #28a745; }
+.loader.warning { background: #ffc107; }
+.loader.danger { background: #dc3545; }
+.loader.info { background: #17a2b8; }
+
+/* Size Variants */
+.loader.small {
+  --loader-size: 30px;
+  --loader-thickness: 6px;
+}
+
+.loader.medium {
+  --loader-size: 50px;
+  --loader-thickness: 8px;
+}
+
+.loader.large {
+  --loader-size: 80px;
+  --loader-thickness: 10px;
+}
+
+/* Speed Variants */
+.loader.slow {
+  --loader-speed: 2s;
+}
+
+.loader.fast {
+  --loader-speed: 0.5s;
+}
+
+/* Inline Loader */
+.loader.inline {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.5rem;
+}
+
+/* Button with loader */
+.button-with-loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-loader {
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  margin: 0;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .full-page-loader {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .loader-message {
+    color: #ccc;
+  }
+
+  .full-page-message {
+    color: #fff;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    animation-duration: 2s;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .full-page-content {
+    gap: 1rem;
+  }
+
+  .full-page-message {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
